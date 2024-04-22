@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary: #8800d9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,16 +19,182 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@font-face {
+  font-family: "SAP-Font";
+  src: url("../public/assets/fonts/72-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SAP-Font-Semibold";
+  src: url("../public/assets/fonts/72-Semibold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.paragraph1 {
+  font-family: "SAP-Font", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+.paragraph2 {
+  font-family: "SAP-Font", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 25.3px;
+}
+.paragraph3 {
+  font-family: "SAP-Font", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+}
+.paragraph4 {
+  font-family: "SAP-Font-Semibold", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18.4px;
+}
+.paragraph5 {
+  font-family: "SAP-Font-Semibold", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 13.8px;
+}
+.paragraph6 {
+  font-family: "SAP-Font", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20.7px;
+}
+.paragraph7 {
+  font-family: "SAP-Font", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.1px;
+}
+
+.header {
+  background: linear-gradient(89.73deg, #7e00d3 0.35%, #c323be 65.69%, #f67075 99.88%);
+}
+.tooltip::before {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Position the arrow just above the tooltip */
+  left: 50%; /* Position the arrow in the middle of the button */
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent rgba(41, 0, 60, 1) transparent;
+}
+.upload-btn:hover + .tooltip {
+  opacity: 1;
+}
+
+.chat-container {
+  background: linear-gradient(89.73deg, #7e00d3 0.35%, #c323be 65.69%, #f67075 99.88%);
+}
+
+.table-column {
+  color: #8100d6;
+}
+.table-column:focus,
+.table-column:hover {
+  outline: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.user-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #8100d7;
+  color: #8100d7;
+  box-shadow: 9999px 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0.25s;
+}
+.dot-pulse::before,
+.dot-pulse::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #8100d7;
+  color: #8100d7;
+}
+.dot-pulse::before {
+  box-shadow: 9984px 0 0 -5px;
+  animation: dot-pulse-before 1.5s infinite linear;
+  animation-delay: 0s;
+}
+.dot-pulse::after {
+  box-shadow: 10014px 0 0 -5px;
+  animation: dot-pulse-after 1.5s infinite linear;
+  animation-delay: 0.5s;
+}
+
+@keyframes dot-pulse-before {
+  0% {
+    box-shadow: 9984px 0 0 -5px;
+  }
+  30% {
+    box-shadow: 9984px 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: 9984px 0 0 -5px;
+  }
+}
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 9999px 0 0 -5px;
+  }
+  30% {
+    box-shadow: 9999px 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: 9999px 0 0 -5px;
+  }
+}
+@keyframes dot-pulse-after {
+  0% {
+    box-shadow: 10014px 0 0 -5px;
+  }
+  30% {
+    box-shadow: 10014px 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: 10014px 0 0 -5px;
   }
 }
