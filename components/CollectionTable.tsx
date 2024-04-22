@@ -86,14 +86,14 @@ export default function CollectionTable() {
           }
         })
         console.log(columns)
-        setTableData((prev) => {
+        setTableData((prev: any) => {
           return { ...prev, columns: columns }
         })
 
-        const rows: object[] = data.map((row, i) => {
+        const rows: object[] = data.map((row: any, i: any) => {
           return { ...row, id: i }
         })
-        setTableData((prev) => {
+        setTableData((prev: any) => {
           return { ...prev, rows: rows }
         })
       })
