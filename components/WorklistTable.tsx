@@ -248,7 +248,7 @@ interface HeadCell {
 
 interface EnhancedTableProps {
   // numSelected: number
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void
+  onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void
   // onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void
   order: Order
   orderBy: string
@@ -257,7 +257,7 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, rowCount, onRequestSort } = props
-  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property)
   }
 
