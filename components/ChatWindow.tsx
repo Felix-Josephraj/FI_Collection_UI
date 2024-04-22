@@ -41,7 +41,7 @@ const ChatWindow = () => {
   }
 
   //When enter is pressed
-  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       // setMessages((prev) => {
       //   return [...prev, { sender: "bot", message: "message" }]

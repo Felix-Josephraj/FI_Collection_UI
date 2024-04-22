@@ -131,7 +131,11 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
             <section className="flex flex-row gap-2 pl-4  mr-8" key={i}>
               <Image src={botIcon} alt="Bot Icon" className="self-start" />
               <div className="bg-[#FBF1FF] rounded-lg p-3 text-black w-[100%] whitespace-pre-wrap paragraph1">
-                {typeof message.message === "object" ? <TableData data={message.message} /> : message.message}
+                {typeof message.message === "object" ? (
+                  <TableData data={message.message as DataStructure} />
+                ) : (
+                  message.message
+                )}
                 {/* <Box
                   sx={{
                     width: "100%",
@@ -176,7 +180,7 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
         else
           return (
             <section key={i} className="bg-[#8100D7] p-3 rounded-lg ml-8 mr-4 self-end text-white w-[63%] paragraph1">
-              {message.message}
+              {message.message as string}
             </section>
           )
       })}
