@@ -46,8 +46,17 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
   //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
   //   { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
   // ]
+  interface DataStructure {
+    [key: string]: {
+      [key: string]: any // You might want to specify the inner structure type here
+    }
+  }
+  interface Row {
+    id: number
+    [key: string]: any
+  }
 
-  const TableData: React.FC<{ data: object }> = ({ data }) => {
+  const TableData: React.FC<{ data: DataStructure }> = ({ data }) => {
     const columns: GridColDef<(typeof rows)[number]>[] = Object.keys(data).map((column) => {
       return {
         field: column,
@@ -58,7 +67,7 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
       }
     })
 
-    const rows: object[] = []
+    const rows: Row[] = []
 
     // Assuming all inner objects have the same keys
     if (Object.keys(data).length > 0) {
@@ -67,7 +76,7 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
       keys.forEach((key, i) => {
         const row = { id: i }
         Object.keys(data).forEach((innerKey) => {
-          row[innerKey] = data[innerKey][key]
+          ;(row as any)[innerKey] = data[innerKey][key]
         })
         rows.push(row)
       })
