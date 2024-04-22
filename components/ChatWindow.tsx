@@ -12,7 +12,7 @@ const ChatWindow = () => {
     // { sender: "user", message: "What is the cumulative valices for Customer Amazon?" },
     // { sender: "bot", message: "What is the cumulaoverdue invoices for Customer Amazon?" },
     // { sender: "user", message: "What is the cumuustomer Amazon?" },
-    // { sender: "bot", message: "What is the  invoices for Customer Amazon?" },
+    // { s ender: "bot", message: "What is the  invoices for Customer Amazon?" },
   ])
 
   const getAnswer = async () => {
