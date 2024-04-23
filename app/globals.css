@@ -198,3 +198,10 @@ body {
     box-shadow: 10014px 0 0 -5px;
   }
 }
+
+.profile-img {
+  background-image: url("../public/assets/images/profile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

@@ -54,7 +54,7 @@ const ChatWindow = () => {
   return (
     <div className="text-black mt-[29px] chat-container  rounded-[16px] h-[94%] max-h-[612px]">
       <div className="flex flex-row pl-5 pt-[9px] pb-2 gap-3">
-        <div className="rounded-full bg-white h-[41px] w-[41px]"></div>
+        <div className="rounded-full bg-transparent h-[41px] w-[41px] profile-img"></div>
         <h1 className="text-white self-center paragraph6">NiColl</h1>
       </div>
       <section className="chat-screen bg-white mx-1 my-1 rounded-[12px] h-[89%]  relative  flex  flex-col">
