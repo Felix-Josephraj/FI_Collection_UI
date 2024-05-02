@@ -9,6 +9,14 @@ interface ChatMessageProps {
   messages: { message: string | object; sender: "user" | "bot"; isTable?: boolean }[]
 }
 const ChatMessage = ({ messages }: ChatMessageProps) => {
+  const containsURL = (message: string) => {
+    // Regular expression pattern to match URLs
+    var urlPattern = /https?:\/\/(?:[-\w.]|(?:%[\da-fA-F]{2}))+/
+
+    // Check if the string contains a URL
+    return urlPattern.test(message)
+  }
+
   // const columns: GridColDef<(typeof rows)[number]>[] = [
   //   {
   //     field: "id",
@@ -133,6 +141,14 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
               <div className="bg-[#FBF1FF] rounded-lg p-3 text-black w-[100%] whitespace-pre-wrap paragraph1">
                 {typeof message.message === "object" ? (
                   <TableData data={message.message as DataStructure} />
+                ) : containsURL(message.message) ? (
+                  <img
+                    src={message.message}
+                    alt="Plot"
+                    className="rounded-md"
+                    // width={500}
+                    // height={500}
+                  ></img>
                 ) : (
                   message.message
                 )}
