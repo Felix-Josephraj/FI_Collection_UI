@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import ChatMessage from "./ChatMessage"
 import axios from "axios"
 
@@ -22,6 +22,9 @@ const ChatWindow = () => {
       })
       setUserInput("")
       setIsLoading(true)
+      setTimeout(() => {
+        scrollDown()
+      }, 1000)
       axios
         .post("/intelligent_collection?ans=true", {
           user_query: userInput,
@@ -32,6 +35,9 @@ const ChatWindow = () => {
           setMessages((prev) => {
             return [...prev, { sender: "bot", message: res.data.final_answer, isTable: isTable }]
           })
+          setTimeout(() => {
+            scrollDown()
+          }, 1000)
         })
         // .catch((err) => console.log(err))
         .finally(() => {
@@ -49,16 +55,21 @@ const ChatWindow = () => {
       getAnswer()
     }
   }
-
+  const scrollableDivRef = useRef<HTMLDivElement>(null)
   const [userInput, setUserInput] = useState("")
+  const scrollDown = () => {
+    if (scrollableDivRef.current) {
+      scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight
+    }
+  }
   return (
     <div className="text-black mt-[29px] chat-container  rounded-[16px] h-[94%] max-h-[612px]">
       <div className="flex flex-row pl-5 pt-[9px] pb-2 gap-3">
         <div className="rounded-full bg-transparent h-[41px] w-[41px] profile-img"></div>
         <h1 className="text-white self-center paragraph6">NiColl</h1>
       </div>
-      <section className="chat-screen bg-white mx-1 my-1 rounded-[12px] h-[89%]  relative  flex  flex-col">
-        <div className="h-[89%] overflow-y-auto pb-4">
+      <section className="chat-screen bg-white mx-1 my-1 rounded-[12px] h-[89%]  relative  flex  flex-col ">
+        <div className="h-[89%] overflow-y-auto pb-4" ref={scrollableDivRef}>
           {/* <h1>helo</h1> */}
 
           <ChatMessage messages={messages} />
