@@ -93,8 +93,19 @@ export default function CollectionTable() {
         const rows: object[] = data.map((row: any, i: any) => {
           return { ...row, id: i }
         })
+        interface rowObject {
+          [key: string]: any
+        }
+        const roundedData = rows.map((obj: rowObject) => {
+          for (let key in obj) {
+            if (typeof obj[key] === "number") {
+              obj[key] = Number(obj[key]).toFixed(2)
+            }
+          }
+          return obj
+        })
         setTableData((prev: any) => {
-          return { ...prev, rows: rows }
+          return { ...prev, rows: roundedData }
         })
       })
       //  .catch((err) => console.log(err))
