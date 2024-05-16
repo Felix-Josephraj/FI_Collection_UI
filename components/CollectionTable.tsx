@@ -64,11 +64,19 @@ export function SortedDescendingIcon() {
     </svg>
   )
 }
+interface CollectionTableProps {
+  fileUploaded: boolean
+}
 
-export default function CollectionTable() {
+export default function CollectionTable({ fileUploaded }: CollectionTableProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [tableData, setTableData] = React.useState({ columns: [], rows: [] })
 
+  React.useEffect(() => {
+    if (fileUploaded) {
+      getProcessFile()
+    }
+  }, [fileUploaded])
   const getProcessFile = async () => {
     setIsLoading(true)
     axios
@@ -127,6 +135,7 @@ export default function CollectionTable() {
       }}
     >
       <DataGrid
+        loading={isLoading}
         sx={{
           paddingBottom: "21px",
           "& ::-webkit-scrollbar": {
