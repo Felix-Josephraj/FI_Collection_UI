@@ -20,6 +20,7 @@ export default function Home() {
   })
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(null)
     const selectedFile = e.target.files && e.target.files[0]
     if (selectedFile) {
       // Check if the selected file is a PDF or XLS file
@@ -79,7 +80,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col bg-white">
       <section className="header w-full h-[70px] flex items-center pl-[38px]">
-        <h1 className="paragraph2">Intelligent collection management</h1>
+        <h1 className="paragraph2">Smart Collections Advisor</h1>
       </section>
       {dialogOpen && (
         <section className="upload-dialog bg-[#57A942] rounded-lg pl-[30px] pr-[22px] py-[27px] w-fit flex flex-row items-center gap-10 absolute right-1.5 top-20 z-40">
