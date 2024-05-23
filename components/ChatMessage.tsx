@@ -1,10 +1,12 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 import botIcon from "../public/assets/images/icons/chatBot.svg"
 import Image from "next/image"
-import { Box } from "@mui/material"
+import { Box, Button, Dialog } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { FitScreen } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
 interface ChatMessageProps {
   messages: { message: string | object; sender: "user" | "bot"; isTable?: boolean }[]
 }
@@ -131,8 +133,34 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
     )
   }
 
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [imgUrl, setImgUrl] = useState<any>(
+    "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+  )
+  const handleDialogClose = () => {
+    setDialogOpen(false)
+  }
   return (
     <div className="flex flex-col gap-4 pt-6">
+      <Dialog onClose={handleDialogClose} open={dialogOpen} className="scale-150">
+        {/* <h1>hello</h1> */}
+        <img
+          src={imgUrl}
+          alt="Plot"
+          className="rounded-sm"
+          // width={400}
+          // height={400}
+        ></img>
+        <IconButton
+          onClick={() => {
+            setDialogOpen(false)
+          }}
+          aria-label="delete"
+          className="p-0 absolute top-2 right-2 bg-gray-200 scale-75"
+        >
+          <CloseIcon className="text-white" />
+        </IconButton>
+      </Dialog>
       {messages.map((message, i) => {
         if (message.sender === "bot")
           return (
@@ -142,16 +170,45 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
                 {typeof message.message === "object" ? (
                   <TableData data={message.message as DataStructure} />
                 ) : containsURL(message.message) ? (
-                  <img
-                    src={message.message}
-                    alt="Plot"
-                    className="rounded-md"
-                    // width={500}
-                    // height={500}
-                  ></img>
+                  <>
+                    <img
+                      src={message.message}
+                      // src={"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"}
+                      alt="Plot"
+                      className="rounded-md"
+                      // width={500}
+                      // height={500}
+                    ></img>
+                    <Button
+                      variant="contained"
+                      className="bg-primary normal-case p-0 mt-2 hover:bg-purple-dark-100"
+                      onClick={() => {
+                        setImgUrl(message.message)
+                        setDialogOpen(true)
+                      }}
+                    >
+                      Expand
+                    </Button>
+                  </>
                 ) : (
                   message.message
                 )}
+                {/* <img
+                  src={"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"}
+                  alt="Plot"
+                  className="rounded-md"
+                  // width={500}
+                  // height={500}
+                ></img>
+                <Button
+                  variant="contained"
+                  className="bg-primary normal-case p-0 mt-2 hover:bg-purple-dark-100"
+                  onClick={() => {
+                    setDialogOpen(true)
+                  }}
+                >
+                  Expand
+                </Button> */}
                 {/* <Box
                   sx={{
                     width: "100%",
