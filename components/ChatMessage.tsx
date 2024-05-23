@@ -1,10 +1,14 @@
 "use client"
 import React, { useState } from "react"
+import React, { useState } from "react"
 import botIcon from "../public/assets/images/icons/chatBot.svg"
 import Image from "next/image"
 import { Box, Button, Dialog } from "@mui/material"
+import { Box, Button, Dialog } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { FitScreen } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
 import { IconButton } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 interface ChatMessageProps {
@@ -140,6 +144,13 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
   const handleDialogClose = () => {
     setDialogOpen(false)
   }
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [imgUrl, setImgUrl] = useState<any>(
+    "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+  )
+  const handleDialogClose = () => {
+    setDialogOpen(false)
+  }
   return (
     <div className="flex flex-col gap-4 pt-6">
       <Dialog onClose={handleDialogClose} open={dialogOpen} className="scale-150">
@@ -190,9 +201,45 @@ const ChatMessage = ({ messages }: ChatMessageProps) => {
                       Expand
                     </Button>
                   </>
+                  <>
+                    <img
+                      src={message.message}
+                      // src={"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"}
+                      alt="Plot"
+                      className="rounded-md"
+                      // width={500}
+                      // height={500}
+                    ></img>
+                    <Button
+                      variant="contained"
+                      className="bg-primary normal-case p-0 mt-2 hover:bg-purple-dark-100"
+                      onClick={() => {
+                        setImgUrl(message.message)
+                        setDialogOpen(true)
+                      }}
+                    >
+                      Expand
+                    </Button>
+                  </>
                 ) : (
                   message.message
                 )}
+                {/* <img
+                  src={"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"}
+                  alt="Plot"
+                  className="rounded-md"
+                  // width={500}
+                  // height={500}
+                ></img>
+                <Button
+                  variant="contained"
+                  className="bg-primary normal-case p-0 mt-2 hover:bg-purple-dark-100"
+                  onClick={() => {
+                    setDialogOpen(true)
+                  }}
+                >
+                  Expand
+                </Button> */}
                 {/* <img
                   src={"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"}
                   alt="Plot"
